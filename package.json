@@ -1,6 +1,6 @@
 {
     "name": "@tech-bureau-jp/symbol-sdk",
-    "version": "1.0.3-comsa",
+    "version": "1.0.3-comsa-2022062201",
     "description": "Reactive symbol sdk for typescript and javascript",
     "scripts": {
         "pretest": "npm run build",
@@ -104,7 +104,7 @@
         "crypto-js": "^4.0.0",
         "futoin-hkdf": "^1.3.2",
         "js-sha256": "^0.9.0",
-        "js-sha3": "^0.8.0",
+        "js-sha3": "git+https://github.com/Propine/js-sha3.git",
         "js-sha512": "^0.8.0",
         "long": "^4.0.0",
         "merkletreejs": "^0.2.9",
