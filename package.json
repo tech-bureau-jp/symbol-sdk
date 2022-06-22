@@ -1,6 +1,6 @@
 {
-    "name": "symbol-sdk",
-    "version": "1.0.3",
+    "name": "@tech-bureau-jp/symbol-sdk",
+    "version": "1.0.3-comsa",
     "description": "Reactive symbol sdk for typescript and javascript",
     "scripts": {
         "pretest": "npm run build",
@@ -30,6 +30,9 @@
         "bootstrap-compose": "symbol-bootstrap compose -t target/bootstrap-test",
         "bootstrap-config": "symbol-bootstrap config -p bootstrap -c ./e2e/e2e-preset.yml -t target/bootstrap-test"
     },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    },
     "pre-commit": [
         "lint"
     ],
@@ -51,13 +54,13 @@
             "email": "guillem@nemeurope.eu"
         }
     ],
-    "bugs": "https://github.com/nemtech/symbol-sdk-typescript-javascript/issues",
+    "bugs": "https://github.com/tech-bureau-jp/symbol-sdk/issues",
     "repository": {
         "type": "git",
-        "url": "https://github.com/nemtech/symbol-sdk-typescript-javascript.git"
+        "url": "https://github.com/tech-bureau-jp/symbol-sdk.git"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/nemtech/symbol-sdk-typescript-javascript#readme",
+    "homepage": "https://github.com/tech-bureau-jp/symbol-sdk#readme",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
     "engines": {
@@ -74,7 +77,7 @@
         "@typescript-eslint/eslint-plugin": "^5.0.0",
         "@typescript-eslint/parser": "^5.0.0",
         "assert": "^1.5.0",
-            "chai": "^4.2.0",
+        "chai": "^4.2.0",
         "coveralls": "^3.1.0",
         "create-ts-index": "^1.13.6",
         "eslint": "^8.0.1",
