@@ -49,6 +49,10 @@ export class Address {
             networkType = NetworkType.TEST_NET;
         } else if (addressTrimAndUpperCase.charAt(0) === 'N') {
             networkType = NetworkType.MAIN_NET;
+        } else if (addressTrimAndUpperCase.charAt(0) === 'S') {
+            networkType = NetworkType.MIJIN_TEST;
+        } else if (addressTrimAndUpperCase.charAt(0) === 'M') {
+            networkType = NetworkType.MIJIN;
         } else {
             throw new Error('Address Network unsupported');
         }
