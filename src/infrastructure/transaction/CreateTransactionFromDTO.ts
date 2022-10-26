@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Convert as convert } from '../../core/format';
+import { Convert } from '../..';
 import { UnresolvedMapping } from '../../core/utils';
 import { MessageFactory, MosaicSupplyRevocationTransaction, UInt64 } from '../../model';
 import { Address, PublicAccount } from '../../model/account';
@@ -118,9 +118,25 @@ const extractTransactionMeta = (meta: any, id: string): TransactionInfo | Aggreg
         return undefined;
     }
     if (meta.aggregateHash || meta.aggregateId) {
-        return new AggregateTransactionInfo(UInt64.fromNumericString(meta.height), meta.index, id, meta.aggregateHash, meta.aggregateId);
+        return new AggregateTransactionInfo(
+            UInt64.fromNumericString(meta.height),
+            meta.index,
+            id,
+            UInt64.fromNumericString(meta.timestamp ?? '0'),
+            meta.feeMultiplier ?? 0,
+            meta.aggregateHash,
+            meta.aggregateId,
+        );
     }
-    return new TransactionInfo(UInt64.fromNumericString(meta.height), meta.index, id, meta.hash, meta.merkleComponentHash);
+    return new TransactionInfo(
+        UInt64.fromNumericString(meta.height),
+        meta.index,
+        id,
+        UInt64.fromNumericString(meta.timestamp ?? '0'),
+        meta.feeMultiplier ?? 0,
+        meta.hash,
+        meta.merkleComponentHash,
+    );
 };
 /**
  * @internal
@@ -393,7 +409,7 @@ const CreateStandaloneTransactionFromDTO = (transactionDTO, transactionInfo): Tr
                 extractRecipient(transactionDTO.targetAddress),
                 UInt64.fromHex(transactionDTO.scopedMetadataKey),
                 transactionDTO.valueSizeDelta,
-                convert.decodeHex(transactionDTO.value),
+                Convert.hexToUint8(transactionDTO.value),
                 signature,
                 signer,
                 transactionInfo,
@@ -408,7 +424,7 @@ const CreateStandaloneTransactionFromDTO = (transactionDTO, transactionInfo): Tr
                 UInt64.fromHex(transactionDTO.scopedMetadataKey),
                 UnresolvedMapping.toUnresolvedMosaic(transactionDTO.targetMosaicId),
                 transactionDTO.valueSizeDelta,
-                convert.decodeHex(transactionDTO.value),
+                Convert.hexToUint8(transactionDTO.value),
                 signature,
                 signer,
                 transactionInfo,
@@ -423,7 +439,7 @@ const CreateStandaloneTransactionFromDTO = (transactionDTO, transactionInfo): Tr
                 UInt64.fromHex(transactionDTO.scopedMetadataKey),
                 NamespaceId.createFromEncoded(transactionDTO.targetNamespaceId),
                 transactionDTO.valueSizeDelta,
-                convert.decodeHex(transactionDTO.value),
+                Convert.hexToUint8(transactionDTO.value),
                 signature,
                 signer,
                 transactionInfo,

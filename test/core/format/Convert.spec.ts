@@ -407,7 +407,7 @@ describe('convert', () => {
         });
     });
 
-    describe('utf8ToUni8', () => {
+    describe('utf8ToUint8', () => {
         it('should convert numeric string to Uint8Array', () => {
             const actual = '123456789';
             // Act:
@@ -441,6 +441,16 @@ describe('convert', () => {
             expect(convert.hexToUtf8(hex)).to.be.equal(plainText);
             expect(convert.utf8ToHex(plainText)).eq(hex);
         });
+
+        it('should convert non-ascii utf8 string to Uint8Array', () => {
+            const actual = '存在';
+            // Act:
+            const uint = convert.utf8ToUint8(actual);
+
+            // Assert:
+            expect(uint.length).to.be.equal(6);
+            expect(convert.uint8ToHex(uint)).to.be.equal('E5AD98E59CA8');
+        });
     });
 
     describe('uint8ToUtf8', () => {
@@ -456,6 +466,16 @@ describe('convert', () => {
 
         it('should convert Uint8Array to utf8 string ', () => {
             const expected = 'test';
+            const actual = convert.utf8ToUint8(expected);
+            // Act:
+            const result = convert.uint8ToUtf8(actual);
+
+            // Assert:
+            expect(result).to.be.equal(expected);
+        });
+
+        it('should convert Uint8Array to non-ascii utf8 string ', () => {
+            const expected = '存在';
             const actual = convert.utf8ToUint8(expected);
             // Act:
             const result = convert.uint8ToUtf8(actual);
