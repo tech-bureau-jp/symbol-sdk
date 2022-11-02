@@ -4,15 +4,51 @@ All notable changes to this project will be documented in this file.
 
 The changelog format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [1.0.4] - NEXT
+## 2.0.3 - 25-Oct-2022
+
+Package  | Version  | Link
+---|---|---
+SDK Core| v2.0.3 | [symbol-sdk](https://www.npmjs.com/package/symbol-sdk)
+Catbuffer | v1.0.2 | [catbuffer-typescript](https://www.npmjs.com/package/catbuffer-typescript)
+Client Library | v1.0.3  | [symbol-openapi-typescript-fetch-client](https://www.npmjs.com/package/symbol-openapi-typescript-fetch-client)
+
+- Bumped AggregateTransaction version to V2. Note that the ability to create or broadcast V1 aggregate transactions has been removed.
+- [Bug] Fixed incorrect Merkle hash calculation for aggregate transactions.
+- [Bug] Fixed the calculation of embedded transaction (also known as inner aggregate transaction) hashes without padding.
+
+## 2.0.2 - 7-Oct-2022
 
 **Milestone**: Symbol Mainnet
 Package  | Version  | Link
 ---|---|---
-SDK Core| v1.0.4 | [symbol-sdk](https://www.npmjs.com/package/symbol-sdk)
+SDK Core| v2.0.2 | [symbol-sdk](https://www.npmjs.com/package/symbol-sdk)
 Catbuffer | v1.0.1 | [catbuffer-typescript](https://www.npmjs.com/package/catbuffer-typescript)
 Client Library | v1.0.3  | [symbol-openapi-typescript-fetch-client](https://www.npmjs.com/package/symbol-openapi-typescript-fetch-client)
 
+[Bug] [#843](https://github.com/symbol/symbol-sdk-typescript-javascript/pull/843): Handle transaction meta's timestamp and feeMultiplier when value is undefined.
+
+## 2.0.1 - 30-May-2022
+
+**Milestone**: Symbol Mainnet
+Package  | Version  | Link
+---|---|---
+SDK Core| v2.0.1 | [symbol-sdk](https://www.npmjs.com/package/symbol-sdk)
+Catbuffer | v1.0.1 | [catbuffer-typescript](https://www.npmjs.com/package/catbuffer-typescript)
+Client Library | v1.0.3  | [symbol-openapi-typescript-fetch-client](https://www.npmjs.com/package/symbol-openapi-typescript-fetch-client)
+
+[Bug] [#839](https://github.com/symbol/symbol-sdk-typescript-javascript/pull/839): Patch missing meta information to transaction dto.
+
+## [2.0.0] - 01-Mar-2022
+
+**Milestone**: Symbol Mainnet
+Package  | Version  | Link
+---|---|---
+SDK Core| v2.0.0 | [symbol-sdk](https://www.npmjs.com/package/symbol-sdk)
+Catbuffer | v1.0.1 | [catbuffer-typescript](https://www.npmjs.com/package/catbuffer-typescript)
+Client Library | v1.0.3  | [symbol-openapi-typescript-fetch-client](https://www.npmjs.com/package/symbol-openapi-typescript-fetch-client)
+
+- **[BREAKING CHANGE]** The type of `value` field in `AccountMetadataTransaction`, `MosaicMetadataTransaction`, `NamespaceMetadataTransaction` classes is changed from `string` to `Uint8Array`.
+- fix: Fixed metadata value non-ascii utf8 encoding issue [#834](https://github.com/symbol/symbol-sdk-typescript-javascript/issues/834)
 - fix: Upgraded Node to 12.22.1.
 - fix: Upgraded typescript to 4.5.4.
 - fix: Improved message API.
@@ -28,7 +64,7 @@ SDK Core| v1.0.3 | [symbol-sdk](https://www.npmjs.com/package/symbol-sdk)
 Catbuffer | v1.0.1 | [catbuffer-typescript](https://www.npmjs.com/package/catbuffer-typescript)
 Client Library | v1.0.3  | [symbol-openapi-typescript-fetch-client](https://www.npmjs.com/package/symbol-openapi-typescript-fetch-client)
 
-- fix: replaced `instanceof` statements. These statements are problematic when npm installs the dependency in multiples modules. 
+- fix: replaced `instanceof` statements. These statements are problematic when npm installs the dependency in multiples modules.
 - feat: added mosaic revocation support.
 
 ## [1.0.2] - 25-Oct-2021
@@ -42,8 +78,8 @@ Client Library | v1.0.2 | [symbol-openapi-typescript-fetch-client](https://www.n
 
 - feat: Multisig multilevel subscription in web listener.
 - feat: Added Deployment data to `ServerInfo`.
-- fix: Fixed observable pipe in `TransactionService`'s announce method. 
-- fix: Allowing plain base32 addresses in rest payloads. Both address formats are supported. 
+- fix: Fixed observable pipe in `TransactionService`'s announce method.
+- fix: Allowing plain base32 addresses in rest payloads. Both address formats are supported.
 - fix: Cosigning from transaction hash only.
 - fix: Transaction `signWith` method broken into smaller methods.
 - fix: Removed unsued dependencies.
@@ -737,7 +773,7 @@ Client Library | v0.7.20-alpha.6  | [nem2-sdk-openapi-typescript-node-client](ht
 
 **Milestone**: Cow
 
-- Fixed #125, maxFee DTO value errors with in-aggregate MosaicSupplyChange and HashLock transactions  
+- Fixed #125, maxFee DTO value errors with in-aggregate MosaicSupplyChange and HashLock transactions
 
 ## [0.11.4] - 17-Apr-2019
 
