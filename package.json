@@ -1,6 +1,6 @@
 {
     "name": "@tech-bureau/symbol-sdk",
-    "version": "2.0.3-comsa-2023011801",
+    "version": "2.0.3-comsa-20230526",
     "description": "Reactive symbol sdk for typescript and javascript",
     "scripts": {
         "pretest": "npm run build",

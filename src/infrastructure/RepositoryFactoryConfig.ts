@@ -56,4 +56,10 @@ export interface RepositoryFactoryConfig {
      * The node public key used for NodeKeyLink transaction in delegated harvesting.
      */
     nodePublicKey?: string;
+
+    /**
+     * The websocket options used.
+     */
+
+    websocketOptions?: any;
 }
