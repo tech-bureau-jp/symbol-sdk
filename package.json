@@ -1,6 +1,6 @@
 {
-    "name": "@tech-bureau-jp/symbol-sdk",
-    "version": "2.0.3-comsa-2022110201",
+    "name": "@tech-bureau/symbol-sdk",
+    "version": "2.0.3-comsa-2023011801",
     "description": "Reactive symbol sdk for typescript and javascript",
     "scripts": {
         "pretest": "npm run build",
@@ -29,9 +29,6 @@
         "bootstrap-run": "symbol-bootstrap run -t target/bootstrap-test",
         "bootstrap-compose": "symbol-bootstrap compose -t target/bootstrap-test",
         "bootstrap-config": "symbol-bootstrap config -p bootstrap -c ./e2e/e2e-preset.yml -t target/bootstrap-test"
-    },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com"
     },
     "pre-commit": [
         "lint"
