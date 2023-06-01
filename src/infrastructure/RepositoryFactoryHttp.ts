@@ -70,6 +70,7 @@ export class RepositoryFactoryHttp implements RepositoryFactory {
     private readonly websocketUrl: string;
     private readonly websocketInjected?: any;
     private readonly fetchApi?: any;
+    private readonly websocketOptions?: any;
     private readonly epochAdjustment: Observable<number>;
     private readonly networkProperties: Observable<NetworkConfiguration>;
     private readonly networkCurrencies: Observable<NetworkCurrencies>;
@@ -104,6 +105,7 @@ export class RepositoryFactoryHttp implements RepositoryFactory {
         }
         this.websocketUrl = configs?.websocketUrl ? configs?.websocketUrl : `${url.replace(/\/$/, '')}/ws`;
         this.websocketInjected = configs?.websocketInjected;
+        this.websocketOptions = configs?.websocketOptions;
         this.networkCurrencies = configs?.networkCurrencies
             ? observableOf(configs.networkCurrencies)
             : this.cache(() => new CurrencyService(this).getNetworkCurrencies());
@@ -190,7 +192,13 @@ export class RepositoryFactoryHttp implements RepositoryFactory {
     }
 
     createListener(): IListener {
-        return new Listener(this.websocketUrl, this.createNamespaceRepository(), this.websocketInjected, this.createMultisigRepository());
+        return new Listener(
+            this.websocketUrl,
+            this.createNamespaceRepository(),
+            this.websocketInjected,
+            this.createMultisigRepository(),
+            this.websocketOptions,
+        );
     }
 
     getEpochAdjustment(): Observable<number> {

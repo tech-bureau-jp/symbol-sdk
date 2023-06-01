@@ -43,13 +43,15 @@ export class MultisigGraphUtils {
                         children: [],
                     });
                     // find the entry matching with address matching cosignatory address and update his children
-                    const updateRecursively = (address: string, object: MultisigChildrenTreeObject) => (obj): any => {
-                        if (obj.address === address) {
-                            obj.children.push(object);
-                        } else if (obj.children) {
-                            obj.children.forEach(updateRecursively(address, object));
-                        }
-                    };
+                    const updateRecursively =
+                        (address: string, object: MultisigChildrenTreeObject) =>
+                        (obj): any => {
+                            if (obj.address === address) {
+                                obj.children.push(object);
+                            } else if (obj.children) {
+                                obj.children.forEach(updateRecursively(address, object));
+                            }
+                        };
                     entry.cosignatoryAddresses.forEach((addressVal) => {
                         mappedTree.forEach(
                             updateRecursively(addressVal['address'], {

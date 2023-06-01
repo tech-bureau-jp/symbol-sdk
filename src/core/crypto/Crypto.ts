@@ -96,7 +96,8 @@ export class Crypto {
         const keyPair = KeyPair.createKeyPairFromPrivateKeyString(senderPriv);
         const encKey = Buffer.from(utility.catapult_crypto.deriveSharedKey(keyPair.privateKey, convert.hexToUint8(recipientPub)), 32);
         const encIv = Buffer.from(iv);
-        const cipher = crypto.createCipheriv(Crypto.AES_ALGO, encKey, encIv);
+        const gcmTypes = Crypto.AES_ALGO as crypto.CipherGCMTypes;
+        const cipher = crypto.createCipheriv(gcmTypes, encKey, encIv);
         const encrypted = Buffer.concat([cipher.update(Buffer.from(convert.hexToUint8(msg))), cipher.final()]);
         const tag = cipher.getAuthTag();
         // Result
@@ -150,7 +151,8 @@ export class Crypto {
         const encKey = Buffer.from(utility.catapult_crypto.deriveSharedKey(keyPair.privateKey, convert.hexToUint8(senderPublic)), 32);
         const encIv = Buffer.from(new Uint8Array(tagAndIv.buffer, 16, 12));
         const encTag = Buffer.from(new Uint8Array(tagAndIv.buffer, 0, 16));
-        const cipher = crypto.createDecipheriv(Crypto.AES_ALGO, encKey, encIv);
+        const gcmTypes = Crypto.AES_ALGO as crypto.CipherGCMTypes;
+        const cipher = crypto.createDecipheriv(gcmTypes, encKey, encIv);
         cipher.setAuthTag(encTag);
         const decrypted = Buffer.concat([cipher.update(Buffer.from(payload)), cipher.final()]);
         // Result

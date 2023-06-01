@@ -101,6 +101,10 @@ export class Listener implements IListener {
          * Multisig repository for resolving multisig accounts
          */
         private multisigRepository?: MultisigRepository,
+        /**
+         * WebSocket Options
+         */
+        private websocketOptions?: any,
     ) {
         this.url = url.replace(/\/$/, '');
         this.messageSubject = new Subject();
@@ -117,7 +121,7 @@ export class Listener implements IListener {
                 if (this.websocketInjected) {
                     this.webSocket = new this.websocketInjected(this.url);
                 } else {
-                    this.webSocket = new WebSocket(this.url);
+                    this.webSocket = new WebSocket(this.url, this.websocketOptions ? this.websocketOptions : undefined);
                 }
                 // eslint-disable-next-line @typescript-eslint/no-empty-function
                 this.webSocket.onopen = (): void => {};
@@ -593,9 +597,8 @@ export class Listener implements IListener {
             mergeMap((address: Address) => {
                 return this.multisigRepository!.getMultisigAccountGraphInfo(address).pipe(
                     map((multisigInfo) => {
-                        const multisigGraphInfo: MultisigAccountInfo[][] = MultisigGraphUtils.getMultisigInfoFromMultisigGraphInfo(
-                            multisigInfo,
-                        );
+                        const multisigGraphInfo: MultisigAccountInfo[][] =
+                            MultisigGraphUtils.getMultisigInfoFromMultisigGraphInfo(multisigInfo);
                         const multisigChildren: MultisigChildrenTreeObject[] = MultisigGraphUtils.getMultisigChildren(multisigGraphInfo);
                         const subscribers: Address[] = [address];
                         if (!!multisigChildren.length && multisigChildren[0].children) {

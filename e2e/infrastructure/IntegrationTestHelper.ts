@@ -15,7 +15,7 @@
  */
 import { firstValueFrom } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Addresses, BootstrapService, BootstrapUtils, ConfigLoader, StartParams } from 'symbol-bootstrap';
+import { Addresses, AsyncUtils, BootstrapService, ConfigLoader, Logger, LoggerFactory, StartParams } from 'symbol-bootstrap';
 import { IListener, RepositoryFactory, RepositoryFactoryHttp } from '../../src/infrastructure';
 import { UInt64 } from '../../src/model';
 import { Account } from '../../src/model/account';
@@ -43,7 +43,8 @@ export class IntegrationTestHelper {
     public harvestingAccount: Account;
     public transactionService: TransactionService;
     public networkCurrency: Currency;
-    public service = new BootstrapService();
+    public logger: Logger = LoggerFactory.getLogger('info');
+    public service = new BootstrapService(this.logger);
     public config: StartParams;
     public startEachTime = true;
     public epochAdjustment: number;
@@ -52,7 +53,7 @@ export class IntegrationTestHelper {
     private async loadBootstrap(): Promise<{ accounts: string[]; apiUrl: string; addresses: Addresses }> {
         const target = process.env.REST_DEV ? '../catapult-rest/rest/target' : 'target/bootstrap-test';
         console.log('Loading bootstrap server');
-        const addresses = new ConfigLoader().loadExistingAddresses(target, false);
+        const addresses = new ConfigLoader(this.logger).loadExistingAddresses(target, false);
         return this.toAccounts(addresses);
     }
 
@@ -69,7 +70,7 @@ export class IntegrationTestHelper {
         if (this.config && this.startEachTime) {
             console.log('Stopping bootstrap server....');
             await this.service.stop(this.config);
-            await BootstrapUtils.sleep(2000);
+            await AsyncUtils.sleep(2000);
         }
     }
 
