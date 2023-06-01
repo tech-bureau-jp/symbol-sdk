@@ -1,0 +1,17 @@
+version: "3"
+services:
+  sdk:
+    platform: linux/x86_64
+    image: symbol-sdk
+    build:
+      context: ./docker/node
+      args:
+        - WORK_DIR=/var/www/myapp
+    volumes:
+      - ./:/var/www/myapp
+      - ~/.npmrc:/root/.npmrc
+    stdin_open: true
+    tty: true
+    command: bash -c 'yarn build && npm publish'
+    # command: npm publish --tag beta
+    # command: /bin/sh -c "while :; do sleep 10; done"
