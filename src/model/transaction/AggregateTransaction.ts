@@ -158,7 +158,7 @@ export class AggregateTransaction extends Transaction {
          * As buffer uses separate builder class for Complete and bonded
          */
         const builder = AggregateCompleteTransactionBuilder.loadFromBinary(Convert.hexToUint8(payload));
-        const type = (builder.type as number) as TransactionType;
+        const type = builder.type as number as TransactionType;
         const innerTransactions = builder.getTransactions();
         const networkType = builder.getNetwork().valueOf();
         const signerPublicKey = Convert.uint8ToHex(builder.getSignerPublicKey().publicKey);

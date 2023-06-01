@@ -597,9 +597,8 @@ export class Listener implements IListener {
             mergeMap((address: Address) => {
                 return this.multisigRepository!.getMultisigAccountGraphInfo(address).pipe(
                     map((multisigInfo) => {
-                        const multisigGraphInfo: MultisigAccountInfo[][] = MultisigGraphUtils.getMultisigInfoFromMultisigGraphInfo(
-                            multisigInfo,
-                        );
+                        const multisigGraphInfo: MultisigAccountInfo[][] =
+                            MultisigGraphUtils.getMultisigInfoFromMultisigGraphInfo(multisigInfo);
                         const multisigChildren: MultisigChildrenTreeObject[] = MultisigGraphUtils.getMultisigChildren(multisigGraphInfo);
                         const subscribers: Address[] = [address];
                         if (!!multisigChildren.length && multisigChildren[0].children) {
