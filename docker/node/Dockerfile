@@ -1,4 +1,4 @@
-FROM node:18-buster
+FROM node:18-bullseye
 
 LABEL "com.vendor"="Techbureau, Corp." \
       version="1.0" \
